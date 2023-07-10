@@ -1,0 +1,8 @@
+---
+- name: Playbook for create user
+  hosts: name-host
+  become: yes
+
+  tasks:
+  - name: Create myuser with password
+    shell: useradd -m myuser && echo "myuser:UserPass" | chpasswd 

@@ -1,0 +1,16 @@
+---
+- name: Playbook for iptables
+  hosts: name-host
+  become: yes
+          
+  task:
+  - name: allow port 9100 from ip
+    shell: iptables -A INPUT -p tcp --dport 9100 -s 123.145.167.245 -j ACCEPT
+    
+  - name: allow ssh input
+    shell: iptables -A INPUT -p tcp --dport 37656 -j ACCEPT
+  - name: allow ssh output
+    shell: iptables -A OUTPUT -p udp –sport 37656 -j ACCEPT
+
+  - name: close default other input connect
+    shell: iptables -P INPUT DROP
